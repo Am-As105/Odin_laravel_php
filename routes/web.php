@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LinksController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 // use   \bootstrap\app;
 Route::get('/', function () {
     return view('welcome');
@@ -19,5 +21,19 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+// Route::get('/category/create', [CategoryController::class , 'show']);
+// Route::post('/categories/create', [CategoryController::class , 'store']);
+
+Route::middleware('auth')->group(function () {
+    Route::resource('categories', CategoryController::class);
+});
+
+
+Route::middleware('auth')->group(function ()
+{
+    Route::resource('links', LinksController::class);
+
+});
 
 require __DIR__.'/auth.php';
